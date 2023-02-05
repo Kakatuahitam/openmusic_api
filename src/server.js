@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const Hapi = require('@hapi/hapi');
 const ClientError = require('./exceptions/ClientError');
+// const NotFoundError = require('./exceptions/NotFoundError');
 
 const albums = require('./api/albums');
 const AlbumsService = require('./services/psql/AlbumsService');
@@ -50,10 +51,18 @@ const init = async () => {
         return h.continue;
       }
 
+      var errorMessage;
+
+      if (process.env.NODE_ENV === 'production') {
+        errorMessage = 'we are sorry, we have problem on our server';
+      } else {
+        errorMessage = response.message;
+      }
+
       const newResponse = h.response(
           {
             status: 'error',
-            message: 'we are sorry we have problem on our server',
+            message: errorMessage,
           },
       );
 

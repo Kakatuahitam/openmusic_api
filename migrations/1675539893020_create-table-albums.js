@@ -17,7 +17,7 @@ exports.up = pgm => {
       notNull: true,
     },
 
-    createdAtt: {
+    createdAt: {
       type: 'TEXT',
       notNull: true,
     },

@@ -53,6 +53,7 @@ class SongsHandler {
       return container;
     });
 
+    console.log(songs);
     return {
       status: 'success',
       data: {

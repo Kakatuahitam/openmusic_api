@@ -58,6 +58,29 @@ class AlbumsService {
   /**
    * Constructing editAlbumById query and execute it to DB
    * @param {string} id
+   */
+  async getAlbumSongsById(id) {
+    const query = {
+      text: 'SELECT songs.id, songs.title, songs.performer, "albumId"'+
+            'FROM "songs"'+
+            'JOIN "albums" '+
+            'ON "albumId" = albums.id '+
+            'WHERE albums.id = $1',
+      values: [id],
+    };
+
+    const result = await this._pool.query(query);
+
+    // if (!result.rows.length) {
+    //   throw new NotFoundError('album not found');
+    // }
+
+    return result.rows;
+  }
+
+  /**
+   * Constructing editAlbumById query and execute it to DB
+   * @param {string} id
    * @param {object} {name, year}
    */
   async editAlbumById(id, {name, year}) {

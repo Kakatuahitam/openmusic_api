@@ -22,7 +22,7 @@ class SongsHandler {
     const {title, year, genre, performer, duration, albumId} = request.payload;
 
     const songId = await this._service.addSong(
-      {title, year, genre, performer, duration, albumId}
+        {title, year, genre, performer, duration, albumId},
     );
 
     const response = h.response(
@@ -43,16 +43,17 @@ class SongsHandler {
    */
   async getSongsHandler() {
     const fullSongs = await this._service.getSongs();
-    const songs = fullSongs.map(item => {
+    const songs = fullSongs.map((item) => {
       const container = {
         id: item.id,
         title: item.title,
         performer: item.performer,
-      }
+      };
 
       return container;
     });
 
+    console.log(songs);
     return {
       status: 'success',
       data: {
@@ -107,7 +108,7 @@ class SongsHandler {
     return {
       status: 'success',
       message: 'song successfully deleted',
-    }
+    };
   }
 }
 

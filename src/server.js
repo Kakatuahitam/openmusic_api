@@ -66,7 +66,7 @@ const init = async () => {
         return h.continue;
       }
 
-      var errorMessage;
+      let errorMessage;
 
       if (process.env.NODE_ENV === 'production') {
         errorMessage = 'we are sorry, we have problem on our server';

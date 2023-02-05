@@ -45,20 +45,12 @@ class AlbumsHandler {
     const {id} = request.params;
     const album = await this._service.getAlbumById(id);
     const fullSongs = await this._service.getAlbumSongsById(id);
-<<<<<<< HEAD
     const songs = fullSongs.map((item) => {
-=======
-    const songs = fullSongs.map(item => {
->>>>>>> ad6c6c0a2ae236949353b9eb6db177ecb3c79936
       const container = {
         id: item.id,
         title: item.title,
         performer: item.performer,
-<<<<<<< HEAD
       };
-=======
-      }
->>>>>>> ad6c6c0a2ae236949353b9eb6db177ecb3c79936
 
       return container;
     });

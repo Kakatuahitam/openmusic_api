@@ -40,9 +40,11 @@ class SongsHandler {
 
   /**
    * Get all songs from DB
+   * @param {request} request
    */
-  async getSongsHandler() {
-    const fullSongs = await this._service.getSongs();
+  async getSongsHandler(request) {
+    const {title, performer} = request.query;
+    const fullSongs = await this._service.getSongs(title, performer);
     const songs = fullSongs.map((item) => {
       const container = {
         id: item.id,
@@ -53,7 +55,6 @@ class SongsHandler {
       return container;
     });
 
-    console.log(songs);
     return {
       status: 'success',
       data: {

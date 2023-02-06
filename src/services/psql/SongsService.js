@@ -40,8 +40,54 @@ class SongsService {
 
   /**
    * Constructing getSongById query and execute it to DB
+   * @param {string} title
+   * @param {string} performer
    */
-  async getSongs() {
+  async getSongs(title, performer) {
+    if (title && performer) {
+      title = `%${title}%`;
+      performer = `%${performer}%`;
+
+      const query = {
+        text: 'SELECT * FROM "songs" WHERE "title" ILIKE $1 '+
+            'AND "performer" ILIKE $2',
+        values: [title, performer],
+      };
+
+      const result = await this._pool.query(query);
+
+      console.log(result.rows);
+      return result.rows;
+    }
+
+    if (title) {
+      title = `%${title}%`;
+
+      const query = {
+        text: 'SELECT * FROM "songs" WHERE "title" ILIKE $1 ',
+        values: [title],
+      };
+
+      const result = await this._pool.query(query);
+
+      console.log(result.rows);
+      return result.rows;
+    }
+
+    if (performer) {
+      performer = `%${performer}%`;
+
+      const query = {
+        text: 'SELECT * FROM "songs" WHERE "performer" ILIKE $1 ',
+        values: [performer],
+      };
+
+      const result = await this._pool.query(query);
+
+      console.log(result.rows);
+      return result.rows;
+    }
+
     const result = await this._pool.query('SELECT * FROM "songs"');
     return result.rows;
   }

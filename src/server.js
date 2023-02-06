@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const Hapi = require('@hapi/hapi');
 const ClientError = require('./exceptions/ClientError');
-// const NotFoundError = require('./exceptions/NotFoundError');
 
 const albums = require('./api/albums');
 const AlbumsService = require('./services/psql/AlbumsService');
